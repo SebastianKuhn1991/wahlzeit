@@ -45,14 +45,14 @@ public class Coordinate {
 	public double getDistance(Coordinate c) {
 		double distance = 0;
 		
-		distance = Math.sqrt(Math.pow(c.x- this.x, 2)+Math.pow(c.y- this.y, 2)+Math.pow(c.z- this.z, 2));
+		distance = Math.sqrt(Math.pow(c.getX()- this.x, 2)+Math.pow(c.getY()- this.y, 2)+Math.pow(c.getZ()- this.z, 2));
 		
 		return distance;
 	}
 	
 	public boolean isEqual(Coordinate c) {
 		
-		if(c.x == this.x && c.y == this.y && c.z == this.z) {
+		if(c.getX() == this.x && c.getY() == this.y && c.getZ() == this.z) {
 			return true;
 		} else {
 			return false;
