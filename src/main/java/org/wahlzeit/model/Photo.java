@@ -77,6 +77,11 @@ public class Photo extends DataObject {
 	protected String ownerId;
 	
 	/**
+	 *Location variable
+	 */
+	public Location location = null;
+	
+	/**
 	 * Each photo can be viewed in different sizes (XS, S, M, L, XL)
 	 * Images are pre-computed in these sizes to optimize bandwidth when requested.
 	 */
@@ -402,10 +407,10 @@ public class Photo extends DataObject {
 		return ending;
 	}
 
-	public void setEnding(String ending) {
-		this.ending = ending;
+	public Location getLocation() {
+		return location;
 	}
-
+	
 	/**
 	 * @methodtype boolean query
 	 */
@@ -421,13 +426,11 @@ public class Photo extends DataObject {
 		incWriteCount();
 	}
 	
-	public Location l = null;
-	
-	public void setLocation(Location l) {
-		this.l = l;
+	public void setEnding(String ending) {
+		this.ending = ending;
 	}
 	
-	public Location getLocation() {
-		return l;
+	public void setLocation(Location l) {
+		this.location = l;
 	}
 }

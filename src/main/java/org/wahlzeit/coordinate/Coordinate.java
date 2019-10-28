@@ -6,12 +6,6 @@ public class Coordinate {
 	private double y;
 	private double z;
 	
-	public Coordinate() {
-		this.x = 0;
-		this.y = 0;
-		this.z = 0;
-	}
-	
 	public Coordinate(double x,double y, double z) {
 		this.x = x;
 		this.y = y;
