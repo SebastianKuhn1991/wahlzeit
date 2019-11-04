@@ -22,13 +22,30 @@ package org.wahlzeit.services.mailing;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.wahlzeit.services.ClassRule;
 import org.wahlzeit.services.EmailAddress;
+import org.wahlzeit.services.RuleChain;
+import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
+import org.wahlzeit.testEnvironmentProvider.RegisteredOfyEnvironmentProvider;
+import org.wahlzeit.testEnvironmentProvider.SysConfigProvider;
+import org.wahlzeit.testEnvironmentProvider.UserServiceProvider;
+import org.wahlzeit.testEnvironmentProvider.UserSessionProvider;
+import org.wahlzeit.testEnvironmentProvider.WebFormHandlerProvider;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class EmailServiceTest {
-
+	
+	@ClassRule
+	public static RuleChain ruleChain = RuleChain.
+			outerRule(new LocalDatastoreServiceTestConfigProvider()).
+			around(new RegisteredOfyEnvironmentProvider()).
+			around(new SysConfigProvider()).
+			around(new UserServiceProvider()).
+			around(new UserSessionProvider()).
+			around(new WebFormHandlerProvider());
+	
 	EmailService emailService = null;
 	EmailAddress validAddress = null;
 
@@ -53,6 +70,15 @@ public class EmailServiceTest {
 	public void testSendValidEmail() {
 		try {
 			assertTrue(emailService.sendEmailIgnoreException(validAddress, validAddress, "hi", "test"));
+		} catch (Exception ex) {
+			Assert.fail("Silent mode does not allow exceptions");
+		}
+	}
+	
+	@Test
+	public void testSendEmptyEmail() {
+		try {
+			assertTrue(emailService.sendEmailIgnoreException(validAddress, validAddress, null, null));
 		} catch (Exception ex) {
 			Assert.fail("Silent mode does not allow exceptions");
 		}

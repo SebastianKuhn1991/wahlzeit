@@ -65,6 +65,13 @@ public class EmailAddressTest extends TestCase {
 	public void testEmptyEmailAddress() {
 		assertFalse(EmailAddress.EMPTY.isValid());
 	}
+	
+	/**
+	 *Tests if the local part of the email address is empty
+	 */
+	public void testEmptyLocalPart(String input) {
+		assertFalse(input.charAt(0) == '@');
+	}
 
 }
 
