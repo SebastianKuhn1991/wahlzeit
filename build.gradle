@@ -59,9 +59,10 @@ dependencies {
 }
 
 test {
-    filter {
-        includeTestsMatching "AllTests.java"
+    java {
+        "AllTests.class"
     }
+
     testLogging {
             events "passed", "skipped", "failed"
 

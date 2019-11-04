@@ -44,7 +44,7 @@ public class EmailAddress implements Serializable {
 	/**
 	 *
 	 */
-	protected String value;
+	protected static String value;
 
 	private EmailAddress() {
 		// for Objectify to load
@@ -92,7 +92,7 @@ public class EmailAddress implements Serializable {
 	/**
 	 *
 	 */
-	public InternetAddress asInternetAddress() {
+	public static InternetAddress asInternetAddress() {
 		InternetAddress result = null;
 
 		try {
