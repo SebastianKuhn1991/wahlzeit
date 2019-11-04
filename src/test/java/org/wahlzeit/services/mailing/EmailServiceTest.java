@@ -22,9 +22,7 @@ package org.wahlzeit.services.mailing;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.wahlzeit.services.ClassRule;
 import org.wahlzeit.services.EmailAddress;
-import org.wahlzeit.services.RuleChain;
 import org.wahlzeit.testEnvironmentProvider.LocalDatastoreServiceTestConfigProvider;
 import org.wahlzeit.testEnvironmentProvider.RegisteredOfyEnvironmentProvider;
 import org.wahlzeit.testEnvironmentProvider.SysConfigProvider;
@@ -34,6 +32,9 @@ import org.wahlzeit.testEnvironmentProvider.WebFormHandlerProvider;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.rules.RuleChain;
+import org.junit.ClassRule;
 
 public class EmailServiceTest {
 	

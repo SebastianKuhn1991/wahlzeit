@@ -18,5 +18,4 @@ import org.junit.runners.*;
 	org.wahlzeit.services.mailing.EmailServiceTestSuite.class
 	})
 public class AllTests {
-
 }

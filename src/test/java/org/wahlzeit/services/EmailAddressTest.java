@@ -20,6 +20,8 @@
 
 package org.wahlzeit.services;
 
+import org.junit.Test;
+
 import junit.framework.TestCase;
 
 /**
@@ -69,8 +71,9 @@ public class EmailAddressTest extends TestCase {
 	/**
 	 *Tests if the local part of the email address is empty
 	 */
-	public void testEmptyLocalPart(String input) {
-		assertFalse(input.charAt(0) == '@');
+	@Test
+	public void testInternetAdress() {
+		assertTrue(EmailAddress.asInternetAddress() != null);
 	}
 
 }
