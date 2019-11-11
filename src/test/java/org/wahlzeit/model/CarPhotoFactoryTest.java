@@ -51,6 +51,9 @@ public class CarPhotoFactoryTest {
 		assertNotNull(photoFilter);
 	}
 
+	/**
+	 *
+	 */
 	@Test
 	public void testCreatePhotoTagCollector() {
 		assertNotNull(photoTagCollector);
