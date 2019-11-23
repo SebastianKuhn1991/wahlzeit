@@ -23,4 +23,6 @@ public interface Coordinate {
 	public double getCentralAngle(Coordinate c);
 	
 	public boolean isEqual(Coordinate c);
+
+	public boolean equals(Coordinate c);
 }
