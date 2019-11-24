@@ -81,20 +81,11 @@ public abstract class AbstractCoordinate implements Coordinate {
 	public boolean isEqual(Coordinate c) {
 		return equals(c);
 	}
-	
-	/*
-	 * works for both object types because it also checks the object type of itself
-	 */
+
 	@Override
 	public boolean equals(Coordinate c) {
-		if(this instanceof CartesianCoordinate) {
-			if(!(c instanceof CartesianCoordinate)) {
-				c = c.asCartesianCoordinate();
-			}
-		} else {
-			if (!(c instanceof SphericCoordinate)) {
-				c = c.asSphericCoordinate();
-			}
+		if(!(c instanceof CartesianCoordinate)) {
+			c = c.asCartesianCoordinate();
 		}
 		
 		if(this == c) {

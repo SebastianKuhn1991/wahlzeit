@@ -40,5 +40,24 @@ public class SphericCoordinate extends AbstractCoordinate {
 		double result = 2 * Math.asin(Math.sqrt(mem));
 		
 		return result;
-	}	
+	}
+	
+	@Override
+	public boolean equals(Coordinate c) {
+		if (!(c instanceof SphericCoordinate)) {
+			c = c.asSphericCoordinate();
+		}
+		
+		if(this == c) {
+			return true;
+		}
+
+		if(Double.compare(c.getVar1(), this.getVar1()) == 0
+				&& Double.compare(c.getVar2(), this.getVar2()) == 0
+				&& Double.compare(c.getVar3(), this.getVar3()) == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
