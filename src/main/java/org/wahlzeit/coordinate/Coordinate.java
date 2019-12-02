@@ -25,4 +25,10 @@ public interface Coordinate {
 	public boolean isEqual(Coordinate c);
 
 	public boolean equals(Coordinate c);
+	
+	public void assertNotNull(Coordinate c);
+	
+	public void assertIsObjectType(Coordinate c);
+	
+	public void assertOtherObjectValues(Coordinate c);
 }
