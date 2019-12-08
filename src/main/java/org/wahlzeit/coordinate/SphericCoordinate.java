@@ -7,7 +7,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 	
 	@Override
-	public CartesianCoordinate asCartesianCoordinate() {
+	public CartesianCoordinate asCartesianCoordinate() throws NullPointerException{
 		
 		try {
 			CartesianCoordinate cc = new CartesianCoordinate(this.getVar3()*Math.sin(this.getVar2())*Math.cos(this.getVar1())
@@ -23,7 +23,7 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 	
 	@Override
-	public double getCartesianDistance(Coordinate c) {
+	public double getCartesianDistance(Coordinate c) throws NullPointerException{
 		try {
 			assertNotNull(c);
 			return asCartesianCoordinate().getCartesianDistance(c);
@@ -41,7 +41,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * used haversine formula
 	 */
 	@Override
-	public double getCentralAngle(Coordinate c) {
+	public double getCentralAngle(Coordinate c) 
+			throws NullPointerException, IllegalStateException, IllegalArgumentException{
 		try {
 			assertNotNull(c);
 		
@@ -79,7 +80,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 	
 	@Override
-	public boolean equals(Coordinate c) {
+	public boolean equals(Coordinate c) 
+			throws NullPointerException, IllegalStateException, IllegalArgumentException{
 		try {
 			assertNotNull(c);
 		

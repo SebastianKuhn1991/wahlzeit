@@ -56,7 +56,8 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public double getCartesianDistance(Coordinate c) {
+	public double getCartesianDistance(Coordinate c)
+			throws NullPointerException, IllegalStateException, IllegalArgumentException{
 		
 		try {
 			assertNotNull(c);
@@ -92,7 +93,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public SphericCoordinate asSphericCoordinate(){
+	public SphericCoordinate asSphericCoordinate() throws NullPointerException{
 		try {
 			double radius = Math.sqrt(Math.pow(this.getVar1(), 2) + Math.pow(this.getVar2(), 2) + Math.pow(this.getVar3(), 2));
 			double theta = Math.acos(this.getVar3() / radius);
@@ -109,7 +110,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public double getCentralAngle(Coordinate c) {
+	public double getCentralAngle(Coordinate c) throws NullPointerException{
 		try {
 			assertNotNull(c);
 			return asSphericCoordinate().getCentralAngle(c);
@@ -119,17 +120,23 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public boolean isEqual(Coordinate c) {
+	public boolean isEqual(Coordinate c) 
+			throws NullPointerException, IllegalStateException, IllegalArgumentException{
 		try {
 		assertNotNull(c);
 		return equals(c);
 		}catch(NullPointerException e) {
+			throw new NullPointerException("The given object was null");
+		}catch(IllegalStateException e) {
+			throw e;
+		}catch(IllegalArgumentException e) {
 			throw e;
 		}
 	}
 
 	@Override
-	public boolean equals(Coordinate c) {
+	public boolean equals(Coordinate c) 
+			throws NullPointerException, IllegalStateException, IllegalArgumentException {
 		try {
 			assertNotNull(c);
 		
