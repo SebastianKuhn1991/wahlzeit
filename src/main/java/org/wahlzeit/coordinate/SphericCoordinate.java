@@ -9,19 +9,27 @@ public class SphericCoordinate extends AbstractCoordinate {
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
 		
-		CartesianCoordinate cc = new CartesianCoordinate(this.getVar3()*Math.sin(this.getVar2())*Math.cos(this.getVar1())
+		try {
+			CartesianCoordinate cc = new CartesianCoordinate(this.getVar3()*Math.sin(this.getVar2())*Math.cos(this.getVar1())
 				,this.getVar3()*Math.sin(this.getVar2())*Math.sin(this.getVar1())
 				,this.getVar3()*Math.cos(this.getVar2()));
 		
-		assertNotNull(cc);
+			assertNotNull(cc);
 		
-		return cc;
+			return cc;
+		}catch(NullPointerException e) {
+			return this.asCartesianCoordinate();
+		}
 	}
 	
 	@Override
 	public double getCartesianDistance(Coordinate c) {
-		assertNotNull(c);
-		return asCartesianCoordinate().getCartesianDistance(c);
+		try {
+			assertNotNull(c);
+			return asCartesianCoordinate().getCartesianDistance(c);
+		}catch(NullPointerException e) {
+			throw e;
+		}
 	}
 	
 	@Override
@@ -34,62 +42,78 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 */
 	@Override
 	public double getCentralAngle(Coordinate c) {
-		assertNotNull(c);
+		try {
+			assertNotNull(c);
 		
-		if(!(c instanceof SphericCoordinate)) {
-			c = c.asSphericCoordinate();
+			if(!(c instanceof SphericCoordinate)) {
+				c = c.asSphericCoordinate();
+			}
+		
+			assertIsObjectType(c);
+		
+			doubleValueCheckVar1 = c.getVar1();
+			doubleValueCheckVar2 = c.getVar2();
+			doubleValueCheckVar3 = c.getVar3();
+		
+			assertOtherObjectValues(c);
+		
+			double divLat = Math.toRadians(c.getVar1() - this.getVar1());
+			double divLon = Math.toRadians(c.getVar2() - this.getVar2());
+		
+			double latitudeA = Math.toRadians(this.getVar1());
+			double latitudeB = Math.toRadians(c.getVar1());
+		
+			double mem = Math.pow(Math.asin(divLat/2),  2) + Math.acos(latitudeA) * Math.cos(latitudeB) * Math.pow(Math.asin(divLon/2), 2);
+			double result = 2 * Math.asin(Math.sqrt(mem));
+		
+			assertOtherObjectValues(c);
+		
+			return result;
+		}catch(NullPointerException e) {
+			throw new NullPointerException("The given object was null");
+		}catch(IllegalStateException e) {
+			throw e;
+		}catch(IllegalArgumentException e) {
+			throw e;
 		}
-		
-		assertIsObjectType(c);
-		
-		doubleValueCheckVar1 = c.getVar1();
-		doubleValueCheckVar2 = c.getVar2();
-		doubleValueCheckVar3 = c.getVar3();
-		
-		assertOtherObjectValues(c);
-		
-		double divLat = Math.toRadians(c.getVar1() - this.getVar1());
-		double divLon = Math.toRadians(c.getVar2() - this.getVar2());
-		
-		double latitudeA = Math.toRadians(this.getVar1());
-		double latitudeB = Math.toRadians(c.getVar1());
-		
-		double mem = Math.pow(Math.asin(divLat/2),  2) + Math.acos(latitudeA) * Math.cos(latitudeB) * Math.pow(Math.asin(divLon/2), 2);
-		double result = 2 * Math.asin(Math.sqrt(mem));
-		
-		assertOtherObjectValues(c);
-		
-		return result;
 	}
 	
 	@Override
 	public boolean equals(Coordinate c) {
-		assertNotNull(c);
+		try {
+			assertNotNull(c);
 		
-		if (!(c instanceof SphericCoordinate)) {
-			c = c.asSphericCoordinate();
-		}
+			if (!(c instanceof SphericCoordinate)) {
+				c = c.asSphericCoordinate();
+			}
 		
-		assertIsObjectType(c);
+			assertIsObjectType(c);
 		
-		doubleValueCheckVar1 = c.getVar1();
-		doubleValueCheckVar2 = c.getVar2();
-		doubleValueCheckVar3 = c.getVar3();
+			doubleValueCheckVar1 = c.getVar1();
+			doubleValueCheckVar2 = c.getVar2();
+			doubleValueCheckVar3 = c.getVar3();
 		
-		assertOtherObjectValues(c);
+			assertOtherObjectValues(c);
 		
-		if(this == c) {
-			return true;
-		}
+			if(this == c) {
+				return true;
+			}
 
-		if(Double.compare(c.getVar1(), this.getVar1()) == 0
-				&& Double.compare(c.getVar2(), this.getVar2()) == 0
-				&& Double.compare(c.getVar3(), this.getVar3()) == 0) {
-			assertOtherObjectValues(c);
-			return true;
-		} else {
-			assertOtherObjectValues(c);
-			return false;
+			if(Double.compare(c.getVar1(), this.getVar1()) == 0
+					&& Double.compare(c.getVar2(), this.getVar2()) == 0
+					&& Double.compare(c.getVar3(), this.getVar3()) == 0) {
+				assertOtherObjectValues(c);
+				return true;
+			} else {
+				assertOtherObjectValues(c);
+				return false;
+			}
+		}catch(NullPointerException e) {
+			throw new NullPointerException("The given object was null");
+		}catch(IllegalStateException e) {
+			throw e;
+		}catch(IllegalArgumentException e) {
+			throw e;
 		}
 	}
 	
