@@ -8,7 +8,14 @@ public class SphericCoordinate extends AbstractCoordinate {
 	
 	@Override
 	public CartesianCoordinate asCartesianCoordinate() {
-		return new CartesianCoordinate(this.getVar3()*Math.sin(this.getVar2())*Math.cos(this.getVar1()),this.getVar3()*Math.sin(this.getVar2())*Math.sin(this.getVar1()),this.getVar3()*Math.cos(this.getVar2()));
+		
+		CartesianCoordinate cc = new CartesianCoordinate(this.getVar3()*Math.sin(this.getVar2())*Math.cos(this.getVar1())
+				,this.getVar3()*Math.sin(this.getVar2())*Math.sin(this.getVar1())
+				,this.getVar3()*Math.cos(this.getVar2()));
+		
+		assertNotNull(cc);
+		
+		return cc;
 	}
 	
 	@Override

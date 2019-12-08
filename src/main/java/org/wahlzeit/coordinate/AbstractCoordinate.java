@@ -88,14 +88,11 @@ public abstract class AbstractCoordinate implements Coordinate {
 		double theta = Math.acos(this.getVar3() / radius);
 		double phi = Math.atan(this.getVar2() / this.getVar1());
 		
-		SphericCoordinate sp = new SphericCoordinate(phi, theta, radius);
+		SphericCoordinate sc = new SphericCoordinate(phi, theta, radius);
 		
-		if(sp == null) {
-			String msg = "creating a new SphericCoordinate object failed";
-			throw new NullPointerException(msg);
-		}
+		assertNotNull(sc);
 		
-		return sp;
+		return sc;
 	}
 
 	@Override
