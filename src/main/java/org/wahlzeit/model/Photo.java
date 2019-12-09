@@ -36,6 +36,7 @@ import org.wahlzeit.services.Language;
 import org.wahlzeit.services.ObjectManager;
 
 import java.lang.NullPointerException;
+import java.util.Map;
 
 /**
  * A photo represents a user-provided (uploaded) photo.
