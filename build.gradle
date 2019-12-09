@@ -41,7 +41,11 @@ dependencies {
     providedCompile group: 'javax.servlet', name: 'servlet-api', version:'2.5'
     compile 'com.google.appengine:appengine:+'
 
-    appengineSdk 'com.google.appengine:appengine-java-sdk:+'
+    def appengineVersion = '1.9.76'
+    compile "com.google.appengine:appengine:${appengineVersion}"
+    appengineSdk "com.google.appengine:appengine-java-sdk:${appengineVersion}"
+    compile "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}"
+    compile "com.google.appengine.tools:appengine-gcs-client:+"
 
     compile 'com.google.appengine:appengine-api-1.0-sdk:+'
     compile 'com.google.appengine.tools:appengine-gcs-client:+'
@@ -59,8 +63,9 @@ dependencies {
 }
 
 test {
+
     java {
-        "AllTests.class"
+        "./src/test/java/AllTests.class"
     }
 
     testLogging {
