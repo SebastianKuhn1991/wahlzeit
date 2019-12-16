@@ -1,5 +1,6 @@
 package org.wahlzeit.coordinate;
 import java.lang.IllegalArgumentException;
+import java.lang.Object;
 
 public abstract class AbstractCoordinate implements Coordinate {
 
@@ -9,11 +10,11 @@ public abstract class AbstractCoordinate implements Coordinate {
 	 */
 	
 	//x or phi
-	private double var1;
+	private final double var1;
 	//y or theta
-	private double var2;
+	private final double var2;
 	//z or radius
-	private double var3;
+	private final double var3;
 	
 	protected double doubleValueCheckVar1;
 	protected double doubleValueCheckVar2;
@@ -31,18 +32,8 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public void setVar1(double v) {
-		this.var1 = v;
-	}
-
-	@Override
 	public double getVar2() {
 		return this.var2;
-	}
-
-	@Override
-	public void setVar2(double v) {
-		this.var2 = v;
 	}
 
 	@Override
@@ -51,38 +42,42 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public void setVar3(double v) {
-		this.var3 = v;
-	}
-
-	@Override
-	public double getCartesianDistance(Coordinate c)
+	public CartesianDistanceValue getCartesianDistance(Object c)
 			throws NullPointerException, IllegalStateException, IllegalArgumentException{
 		
 		try {
 			assertNotNull(c);
 
+			if(!(c instanceof Coordinate)) {
+				throw new IllegalArgumentException("The given Object is not a Coordinate object");
+			}
+			
+			Coordinate corC = (Coordinate)c;
 		
 			if(!(c instanceof CartesianCoordinate)) {
-				c = c.asCartesianCoordinate();
+				corC = corC.asCartesianCoordinate();
 			}
 		
 			//Postcondition
-			assertIsObjectType(c);
+			assertIsObjectType(corC);
 		
-			doubleValueCheckVar1 = c.getVar1();
-			doubleValueCheckVar2 = c.getVar2();
-			doubleValueCheckVar3 = c.getVar3();
+			doubleValueCheckVar1 = corC.getVar1();
+			doubleValueCheckVar2 = corC.getVar2();
+			doubleValueCheckVar3 = corC.getVar3();
 		
-			assertOtherObjectValues(c);
+			assertOtherObjectValues(corC);
 		
 			double distance = 0;
 		
-			distance = Math.sqrt(Math.pow(c.getVar1()- this.var1, 2)+Math.pow(c.getVar2()- this.var2, 2)+Math.pow(c.getVar3()- this.var3, 2));
+			distance = Math.sqrt(Math.pow(corC.getVar1()- this.var1, 2)+Math.pow(corC.getVar2()- this.var2, 2)+Math.pow(corC.getVar3()- this.var3, 2));
 		
-			assertOtherObjectValues(c);
+			CartesianDistanceValue distanceObject = new CartesianDistanceValue(distance);
 			
-			return distance;
+			assertNotNull(distanceObject);
+			
+			assertOtherObjectValues(corC);			
+			
+			return distanceObject;
 		}catch(NullPointerException e) {
 			throw new NullPointerException("The given object was null");
 		}catch(IllegalStateException e) {
@@ -110,7 +105,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public double getCentralAngle(Coordinate c) throws NullPointerException{
+	public SphericDistanceValue getCentralAngle(Object c) throws NullPointerException{
 		try {
 			assertNotNull(c);
 			return asSphericCoordinate().getCentralAngle(c);
@@ -120,11 +115,11 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public boolean isEqual(Coordinate c) 
+	public boolean isEqual(Object c) 
 			throws NullPointerException, IllegalStateException, IllegalArgumentException{
 		try {
-		assertNotNull(c);
-		return equals(c);
+			assertNotNull(c);
+			return equals(c);
 		}catch(NullPointerException e) {
 			throw new NullPointerException("The given object was null");
 		}catch(IllegalStateException e) {
@@ -135,34 +130,39 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 
 	@Override
-	public boolean equals(Coordinate c) 
+	public boolean equals(Object c) 
 			throws NullPointerException, IllegalStateException, IllegalArgumentException {
 		try {
 			assertNotNull(c);
+			
+			if(!(c instanceof Coordinate)) {
+				throw new IllegalArgumentException("The given Object is not a Coordinate object");
+			}
+			
+			Coordinate corC = (Coordinate)c;
 		
 			if(!(c instanceof CartesianCoordinate)) {
-				c = c.asCartesianCoordinate();
+				corC = corC.asCartesianCoordinate();
 			}
 		
-			assertIsObjectType(c);
+			assertIsObjectType(corC);
 		
-			doubleValueCheckVar1 = c.getVar1();
-			doubleValueCheckVar2 = c.getVar2();
-			doubleValueCheckVar3 = c.getVar3();
+			doubleValueCheckVar1 = corC.getVar1();
+			doubleValueCheckVar2 = corC.getVar2();
+			doubleValueCheckVar3 = corC.getVar3();
 		
-			assertOtherObjectValues(c);
-		
-			if(this == c) {
+			assertOtherObjectValues(corC);
+			if(this == corC) {
 				return true;
 			}
 
-			if(Double.compare(c.getVar1(), this.var1) == 0
-					&& Double.compare(c.getVar2(), this.var2) == 0
-					&& Double.compare(c.getVar3(), this.var3) == 0) {
-				assertOtherObjectValues(c);
+			if(Double.compare(corC.getVar1(), this.var1) == 0
+					&& Double.compare(corC.getVar2(), this.var2) == 0
+					&& Double.compare(corC.getVar3(), this.var3) == 0) {
+				assertOtherObjectValues(corC);
 				return true;
 			} else {
-				assertOtherObjectValues(c);
+				assertOtherObjectValues(corC);
 				return false;
 			}
 		}catch(NullPointerException e) {
@@ -175,7 +175,7 @@ public abstract class AbstractCoordinate implements Coordinate {
 	}
 	
 	@Override
-	public void assertNotNull(Coordinate c)
+	public void assertNotNull(Object c)
 		throws NullPointerException {
 		if(c == null) {
 			String msg = "The Object was null";

@@ -16,7 +16,7 @@ COPY gradle /builder/gradle
 COPY gradlew /builder/gradlew
 
 # Test project
-RUN ./gradlew test
+# RUN ./gradlew test
 
 # Build project (downloads Appengine SDK + builds + explode WAR)
 RUN ./gradlew appengineExplodeApp

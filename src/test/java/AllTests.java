@@ -5,6 +5,7 @@ import org.junit.runners.*;
 @Suite.SuiteClasses({
 	org.wahlzeit.handlers.TellFriendTest.class,
 	org.wahlzeit.model.AccessRightsTest.class,
+	org.wahlzeit.model.CarPhotoFactoryTest.class,
 	org.wahlzeit.model.FlagReasonTest.class,
 	org.wahlzeit.model.GenderTest.class,
 	org.wahlzeit.model.GuestTest.class,

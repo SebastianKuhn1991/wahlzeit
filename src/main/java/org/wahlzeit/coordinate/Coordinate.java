@@ -4,29 +4,23 @@ public interface Coordinate {
 	
 	public double getVar1();
 	
-	public void setVar1(double v);
-	
 	public double getVar2();
-	
-	public void setVar2(double v);
 	
 	public double getVar3();
 	
-	public void setVar3(double v);
-	
 	public CartesianCoordinate asCartesianCoordinate();
 	
-	public double getCartesianDistance(Coordinate c);
+	public CartesianDistanceValue getCartesianDistance(Object c);
 	
 	public SphericCoordinate asSphericCoordinate();
 	
-	public double getCentralAngle(Coordinate c);
+	public SphericDistanceValue getCentralAngle(Object c);
 	
-	public boolean isEqual(Coordinate c);
+	public boolean isEqual(Object c);
 
-	public boolean equals(Coordinate c);
+	public boolean equals(Object c);
 	
-	public void assertNotNull(Coordinate c);
+	public void assertNotNull(Object c);
 	
 	public void assertIsObjectType(Coordinate c);
 	

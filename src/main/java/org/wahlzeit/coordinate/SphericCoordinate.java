@@ -23,9 +23,9 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 	
 	@Override
-	public double getCartesianDistance(Coordinate c) throws NullPointerException{
+	public CartesianDistanceValue getCartesianDistance(Object c) throws NullPointerException{
 		try {
-			assertNotNull(c);
+			assertNotNull(c);			
 			return asCartesianCoordinate().getCartesianDistance(c);
 		}catch(NullPointerException e) {
 			throw e;
@@ -41,35 +41,45 @@ public class SphericCoordinate extends AbstractCoordinate {
 	 * used haversine formula
 	 */
 	@Override
-	public double getCentralAngle(Coordinate c) 
+	public SphericDistanceValue getCentralAngle(Object c) 
 			throws NullPointerException, IllegalStateException, IllegalArgumentException{
 		try {
 			assertNotNull(c);
+			
+			if(!(c instanceof Coordinate)) {
+				throw new IllegalArgumentException("The given Object is not a Coordinate object");
+			}
+			
+			Coordinate corC = (Coordinate)c;
 		
 			if(!(c instanceof SphericCoordinate)) {
-				c = c.asSphericCoordinate();
+				corC = corC.asSphericCoordinate();
 			}
 		
-			assertIsObjectType(c);
+			assertIsObjectType(corC);
 		
-			doubleValueCheckVar1 = c.getVar1();
-			doubleValueCheckVar2 = c.getVar2();
-			doubleValueCheckVar3 = c.getVar3();
+			doubleValueCheckVar1 = corC.getVar1();
+			doubleValueCheckVar2 = corC.getVar2();
+			doubleValueCheckVar3 = corC.getVar3();
 		
-			assertOtherObjectValues(c);
+			assertOtherObjectValues(corC);
 		
-			double divLat = Math.toRadians(c.getVar1() - this.getVar1());
-			double divLon = Math.toRadians(c.getVar2() - this.getVar2());
+			double divLat = Math.toRadians(corC.getVar1() - this.getVar1());
+			double divLon = Math.toRadians(corC.getVar2() - this.getVar2());
 		
 			double latitudeA = Math.toRadians(this.getVar1());
-			double latitudeB = Math.toRadians(c.getVar1());
+			double latitudeB = Math.toRadians(corC.getVar1());
 		
 			double mem = Math.pow(Math.asin(divLat/2),  2) + Math.acos(latitudeA) * Math.cos(latitudeB) * Math.pow(Math.asin(divLon/2), 2);
 			double result = 2 * Math.asin(Math.sqrt(mem));
 		
-			assertOtherObjectValues(c);
+			SphericDistanceValue distanceObject = new SphericDistanceValue(result);
+			
+			assertNotNull(distanceObject);
+			
+			assertOtherObjectValues(corC);
 		
-			return result;
+			return distanceObject;
 		}catch(NullPointerException e) {
 			throw new NullPointerException("The given object was null");
 		}catch(IllegalStateException e) {
@@ -80,34 +90,40 @@ public class SphericCoordinate extends AbstractCoordinate {
 	}
 	
 	@Override
-	public boolean equals(Coordinate c) 
+	public boolean equals(Object c) 
 			throws NullPointerException, IllegalStateException, IllegalArgumentException{
 		try {
 			assertNotNull(c);
+			
+			if(!(c instanceof Coordinate)) {
+				throw new IllegalArgumentException("The given Object is not a Coordinate object");
+			}
+			
+			Coordinate corC = (Coordinate)c;
 		
 			if (!(c instanceof SphericCoordinate)) {
-				c = c.asSphericCoordinate();
+				corC = corC.asSphericCoordinate();
 			}
 		
-			assertIsObjectType(c);
+			assertIsObjectType(corC);
 		
-			doubleValueCheckVar1 = c.getVar1();
-			doubleValueCheckVar2 = c.getVar2();
-			doubleValueCheckVar3 = c.getVar3();
+			doubleValueCheckVar1 = corC.getVar1();
+			doubleValueCheckVar2 = corC.getVar2();
+			doubleValueCheckVar3 = corC.getVar3();
 		
-			assertOtherObjectValues(c);
+			assertOtherObjectValues(corC);
 		
-			if(this == c) {
+			if(this == corC) {
 				return true;
 			}
 
-			if(Double.compare(c.getVar1(), this.getVar1()) == 0
-					&& Double.compare(c.getVar2(), this.getVar2()) == 0
-					&& Double.compare(c.getVar3(), this.getVar3()) == 0) {
-				assertOtherObjectValues(c);
+			if(Double.compare(corC.getVar1(), this.getVar1()) == 0
+					&& Double.compare(corC.getVar2(), this.getVar2()) == 0
+					&& Double.compare(corC.getVar3(), this.getVar3()) == 0) {
+				assertOtherObjectValues(corC);
 				return true;
 			} else {
-				assertOtherObjectValues(c);
+				assertOtherObjectValues(corC);
 				return false;
 			}
 		}catch(NullPointerException e) {
