@@ -38,6 +38,13 @@ import org.wahlzeit.services.ObjectManager;
 import java.lang.NullPointerException;
 import java.util.Map;
 
+@PatternInstance(
+		patternName = "Abstract Factory",
+		participants = {
+				"AbstractProduct",
+				"ConcreteProduct"
+		}
+)
 /**
  * A photo represents a user-provided (uploaded) photo.
  */
