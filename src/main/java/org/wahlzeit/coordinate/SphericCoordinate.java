@@ -2,10 +2,9 @@ package org.wahlzeit.coordinate;
 import org.wahlzeit.model.PatternInstance;
 
 @PatternInstance(
-		patternName = "Abstract Factory",
+		patternName = "Factory Method",
 		participants = {
-				"AbstractFactory",
-				"ConcreteFactory"
+				"Concrete Product"
 		}
 )
 

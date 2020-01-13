@@ -2,6 +2,15 @@ package org.wahlzeit.coordinate;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
 
+import org.wahlzeit.model.PatternInstance;
+
+@PatternInstance(
+		patternName = "Factory Method",
+		participants = {
+				"Concrete Product"
+		}
+)
+
 public abstract class AbstractCoordinate implements Coordinate {
 
 	/*

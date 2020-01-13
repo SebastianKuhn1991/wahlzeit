@@ -40,6 +40,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+@PatternInstance(
+		patternName = "Singleton",
+		participants = {
+				"PhotoManager"
+		}
+)
+
 /**
  * A photo manager provides access to and manages photos.
  */
