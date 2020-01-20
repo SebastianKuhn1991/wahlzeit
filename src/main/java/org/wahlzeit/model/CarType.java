@@ -38,6 +38,11 @@ public class CarType extends DataObject{
 		return subType.iterator();
 	}
 	
+	public void addSuperType(CarType ct) {
+		assert (ct != null) : "SuberType cannot be null";
+		superType = ct;
+	}
+	
 	public void addSubType(CarType ct) {
 		assert (ct != null) : "SubType cannot be null";
 		subType.add(ct);
