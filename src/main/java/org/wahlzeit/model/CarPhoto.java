@@ -2,6 +2,8 @@ package org.wahlzeit.model;
 
 public class CarPhoto extends Photo{
 	
+	private Car car;
+	
 	public CarPhoto() {
 		super();
 	}
@@ -10,7 +12,7 @@ public class CarPhoto extends Photo{
 		super(id);
 	}
 	
-	public static void main(String[] args) {
-
+	public void setCar(Car car) {
+		this.car = car;
 	}
 }

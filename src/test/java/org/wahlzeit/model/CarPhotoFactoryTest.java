@@ -13,11 +13,14 @@ public class CarPhotoFactoryTest {
 	private CarPhoto carPhoto;
 	private PhotoFilter photoFilter;
 	private PhotoTagCollector photoTagCollector;
+	private CarManager carManager;
+	private Car car;
 
 	@Before
 	public void initCarPhotoFactory() {
 		carPhotoFactory = new CarPhotoFactory();
 		carPhotoFactory.initialize();
+		carManager = new CarManager();
 	}
 		
 	@Before
@@ -25,6 +28,8 @@ public class CarPhotoFactoryTest {
 		carPhoto = carPhotoFactory.createPhoto();
 		photoFilter = carPhotoFactory.createPhotoFilter();
 		photoTagCollector = carPhotoFactory.createPhotoTagCollector();
+		car = carManager.createCar("SUV");
+		carPhoto.setCar(car);
 	}
 
 	/**
